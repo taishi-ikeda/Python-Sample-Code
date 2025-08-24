@@ -1,5 +1,97 @@
 \documentclass{jarticle}
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{itembkbx}
+\usepackage{boites,boites_exemples}
+\usepackage{lipsum}
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{ascmac}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{%
+  language={Python},
+  basicstyle={\small},%
+  identifierstyle={\small},%
+  commentstyle={\small\itshape\color[rgb]{0,0.5,0}},%
+  keywordstyle={\small\bfseries\color[rgb]{0,0,1}},%
+  ndkeywordstyle={\small},%
+  stringstyle={\small\ttfamily\color[rgb]{1,0,1}},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},%
+  numbers=left,%
+  xrightmargin=0zw,%
+  xleftmargin=3zw,%
+  numberstyle={\scriptsize},%
+  stepnumber=1,
+  numbersep=1zw,%
+  lineskip=-0.5ex%
+}
 \title{モンキーハンティング問題}
+\author{}
+\date{}
 \begin{document}
-このコードは一様重力における１次元のモンキーハンティング問題を解くためのコードです。モンキ
+\maketitle
+このコードは一様重力における１次元のモンキーハンティング問題を解くためのコードです。
+モンキーハンティング問題とは、落下する物体Mを下から発射された弾丸Bを命中させる問題です。
+今、$x-z$座標系を考え、-$z$方向に一様重力がかかっているとする。重力加速度を$g$とします。
+弾丸Bの発射位置と初速度をそれぞれ$(x_{B0},z_{B0})$と$(v_{x0},,v_{z0}$とします。また物体Mの初期
+位置を$(x_{M0},z_{M0})$として弾丸Bが発射されたタイミングで物体Mは静止しているとする。こ
+の時、弾丸の軌道の式は$t$を時刻として
+\begin{eqnarray}
+x_{B}(t)&=&v_{x0}t+x_{B0}\\
+z_{B}(t)&=&-\frac{g}{2}t^{2}+v_{z0}t+z_{B0}
+\end{eqnarray}
+で与えられます。一方で物体Mの軌道は
+\begin{eqnarray}
+x_{M}(t)&=&x_{M0}\\
+z_{M}(t)&=&-\frac{g}{2}t^{2}+z_{M0}
+\end{eqnarray}
+故に弾丸Bと物体Mが衝突する条件は
+\begin{eqnarray}
+v_{x0}t+x_{B0}&=&x_{M0}\\
+-\frac{g}{2}t^{2}+v_{z0}t+z_{B0}&=&-\frac{g}{2}t^{2}+z_{M0}
+\end{eqnarray}
+の二つの式が同時に満たされることで、得られる式は
+\begin{eqnarray}
+\frac{v_{z0}}{v_{x0}}=\frac{z_{M0}-z_{0}}{x_{M0}-x_{0}}
+\end{eqnarray}
+となります。
+弾丸Bの発射時の角度を$\theta$とすると
+\begin{eqnarray}
+\tan\theta=\frac{v_{z0}}{v_{x0}}=\frac{z_{M0}-z_{0}}{x_{M0}-x_{0}}
+\end{eqnarray}
+を得ます。
+それでは付属のコードのmain.pyを見てみます。
+\begin{lstlisting}[caption=test,label=test]
+import MonkeyHuntingClass as MH
+g_acc=-9.80655 #重力加速度
+#弾丸Bの初期位置
+xb = 0.0 
+zb = 0.0
+#物体Mの初期位置
+xm = 1.0
+zm = 1.0
+#弾丸の初速度の絶対値
+v_abs=10.0
+
+MH = MH.MonkeyHunting(g_acc)
+MH.set_initial_bullet_position(xb,zb)
+MH.set_initial_monkey_position(xm,zm)
+MH.set_ground(0.0)
+[flag,theta] = MH.solve_theta(v_abs)
+if flag:
+    print(theta)
+else:
+    print("Can not find the solution.")
+ \end{lstlisting}
+ 一行目でMonkeyHunbtingクラスが定義されたMonkeyHuntingClass.pyというファイルを読み込んでいます。
+ 次に2行目から10行目までで使う変数を定義しています。
+12行目でクラスを実体化しMHという名前にしています。
 \end{document}
