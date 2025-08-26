@@ -1,22 +1,6 @@
-from abc import ABCMeta,abstractmethod
+import sort_base
 
-class sort_base(metaclass = ABCMeta):
-    def __init__(self,verbose:bool)->None:
-        self._verbose = verbose
-        self._step_counter=0
-        pass
-
-    @abstractmethod
-    def execute(self)->list[int]:
-        pass
-
-    def check_sort(self,li:list[int])->bool:
-        for i in range(0,len(li)-1):
-            if li[i] > li[i+1]:
-                return False
-        return True
-
-class merge_sort(sort_base):
+class merge_sort(sort_base.sort_base):
     def __init__(self,verbose:bool)->None:
         super().__init__(verbose)
 
@@ -64,6 +48,4 @@ class merge_sort(sort_base):
                 print("step_counter : ",self._step_counter,res)
             res = self.step(res)
         return res[0]
-
-
 
