@@ -1,5 +1,5 @@
 # Python-Sample-Code
-教育教材用に簡単なPythonコードを公開しています。
+教育教材用に簡単なPythonコードを公開しています。\
 ＊greatest_common_denominator:
 	最小公約数を計算するコードです。
 ＊MonkeyHunting
