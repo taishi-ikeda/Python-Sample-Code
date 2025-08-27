@@ -7,7 +7,7 @@ class sort_base(metaclass = ABCMeta):
         pass
 
     @abstractmethod
-    def execute(self)->list[int]:
+    def execute(self,arr:list[int])->list[int]:
         pass
 
     def check_sort(self,li:list[int])->bool:
