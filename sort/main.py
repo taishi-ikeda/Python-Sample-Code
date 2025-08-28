@@ -2,19 +2,20 @@ import sort_merge as sm
 import sort_bubble as sb
 import sort_quick as sp
 import sort_selection as ss
+import sort_insertion as si
 import random
 
-arr = [random.randint(0,100) for i in range(30)]
+arr = [random.randint(0,100) for i in range(10)]
 print(arr)
-SortMerge = sm.merge_sort(True)
+SortMerge = sm.merge_sort(False)
 arr_merge=SortMerge.execute(arr)
 print(arr_merge)
 
-SortBubble = sb.bubble_sort(True)
+SortBubble = sb.bubble_sort(False)
 arr_bubble = SortBubble.execute(arr)
 print(arr_bubble)
 
-SortQuick = sp.quick_sort(True)
+SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
 
@@ -22,6 +23,9 @@ SortSelection = ss.selection_sort(False)
 arr_selection = SortSelection.execute(arr)
 print(arr_selection)
 
+SortInsertion = si.insertion_sort(False)
+arr_insertion = SortInsertion.execute(arr)
+print(arr_insertion)
 
 
-print(arr)
+
