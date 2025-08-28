@@ -1,6 +1,7 @@
 import sort_base
 
 class merge_sort(sort_base.sort_base):
+    __slots__=()
     def __init__(self,verbose:bool)->None:
         super().__init__(verbose)
 

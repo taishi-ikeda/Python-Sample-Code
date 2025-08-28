@@ -2,6 +2,7 @@ import sort_base
 import random
 
 class quick_sort(sort_base.sort_base):
+    __slots__=()
     def __init__(self,verbose:bool)->None:
         super().__init__(verbose)
 

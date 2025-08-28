@@ -1,7 +1,8 @@
 import sort_base
 import copy
 
-class merge_bubble(sort_base.sort_base):
+class bubble_sort(sort_base.sort_base):
+    __slots__=()
     def __init__(self,verbose:bool)->None:
         super().__init__(verbose)
 
