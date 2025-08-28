@@ -3,9 +3,10 @@ import sort_bubble as sb
 import sort_quick as sp
 import sort_selection as ss
 import sort_insertion as si
+import sort_shell as ssh
 import random
 
-arr = [random.randint(0,100) for i in range(10)]
+arr = [random.randint(-100,100) for i in range(30)]
 print(arr)
 SortMerge = sm.merge_sort(False)
 arr_merge=SortMerge.execute(arr)
@@ -26,6 +27,12 @@ print(arr_selection)
 SortInsertion = si.insertion_sort(False)
 arr_insertion = SortInsertion.execute(arr)
 print(arr_insertion)
+
+SortShell = ssh.shell_sort(False)
+arr_shell = SortShell.execute(arr)
+print(arr_shell)
+
+
 
 
 
