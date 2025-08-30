@@ -1,6 +1,7 @@
 import sort_merge as sm
 import sort_bubble as sb
 import sort_quick as sp
+import sort_heap as sh
 import sort_base
 import random
 
@@ -27,4 +28,10 @@ if __name__ == "__main__":
     arr_quick = SortQuick.execute(arr)
     print(arr_quick)
 
-print(arr)
+    SortHeap = sh.heap_sort(True,1000,func)
+    arr_heap = SortHeap.execute(arr)
+    print(arr_heap)
+
+
+
+
