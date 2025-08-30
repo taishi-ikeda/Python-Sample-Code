@@ -1,7 +1,8 @@
-import gcd_class as gcd
+import gcd_class.gcd_class as gcd
 
-a = 11
-b = 2313
+
+a = 12
+b = 232
 
 gcd_method1 = gcd.simple_gcd()
 n1 = gcd_method1.get(a,b)

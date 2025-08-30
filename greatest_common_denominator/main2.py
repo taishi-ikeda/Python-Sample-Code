@@ -1,4 +1,4 @@
-import gcd_class as gcd
+import gcd_class.gcd_class as gcd
 import time
 
 a_max=1000
