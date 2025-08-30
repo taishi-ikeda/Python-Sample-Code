@@ -2,6 +2,9 @@ import sort_merge as sm
 import sort_bubble as sb
 import sort_quick as sp
 import sort_heap as sh
+import sort_insertion as si
+import sort_selection as ss
+import sort_shell as ssh
 import sort_base
 import random
 
@@ -28,9 +31,22 @@ if __name__ == "__main__":
     arr_quick = SortQuick.execute(arr)
     print(arr_quick)
 
+    SortInsertion = si.insertion_sort(False,func)
+    arr_insertion = SortInsertion.execute(arr)
+    print(arr_insertion)
+
+    SortSelection = ss.selection_sort(False,func)
+    arr_selection = SortSelection.execute(arr)
+    print(arr_selection)
+
+    SortShell = ssh.shell_sort(False,func)
+    arr_shell = SortShell.execute(arr)
+    print(arr_shell)
+
     SortHeap = sh.heap_sort(True,1000,func)
     arr_heap = SortHeap.execute(arr)
     print(arr_heap)
+
 
 
 
