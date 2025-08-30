@@ -50,6 +50,8 @@ class heap_sort(sort_base.sort_base):
         return [True,x]
 
     def execute(self,arr:list[int])->list[int]:
+        self._heap=[0]*self._maxsize
+        self._current_size=0
         for ele in arr:
             if not self.push_heap(ele):
                 return []
