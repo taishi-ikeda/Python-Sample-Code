@@ -4,7 +4,7 @@ class gcd_base(metaclass = ABCMeta):
     def __init__(self)->None:
         pass
     @abstractmethod
-    def get(self)->int:
+    def get(self,a:int,b:int)->int:
         pass
 
     def check_parameter(self,a:int,b:int)->bool:
