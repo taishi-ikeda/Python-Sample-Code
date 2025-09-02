@@ -8,7 +8,7 @@ class bubble_sort(sort_base.sort_base):
 
     def execute(self,arr:list[int])->list[int]:
         arr_copy = copy.copy(arr)
-        for i in range(0,len(arr_copy)):
+        for i in range(0,len(arr_copy)-1):
             for j in range(0,len(arr_copy)-i-1):
                 if arr_copy[j] > arr_copy[j+1]:
                     arr_copy[j],arr_copy[j+1] = arr_copy[j+1],arr_copy[j]
