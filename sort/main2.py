@@ -15,6 +15,12 @@ SortBubble = sb.bubble_sort(True)
 arr_bubble = SortBubble.execute(arr)
 print(arr_bubble)
 
+print("selection sort")
+SortSelection = ss.selection_sort(True)
+arr_selection = SortSelection.execute(arr)
+print(arr_selection)
+
+
 
 print("merge sort")
 SortMerge = sm.merge_sort(False)
@@ -26,9 +32,6 @@ SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
 
-SortSelection = ss.selection_sort(False)
-arr_selection = SortSelection.execute(arr)
-print(arr_selection)
 
 SortInsertion = si.insertion_sort(False)
 arr_insertion = SortInsertion.execute(arr)

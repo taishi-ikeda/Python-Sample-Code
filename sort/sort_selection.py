@@ -17,8 +17,7 @@ class selection_sort(sort_base.sort_base):
                     v_max = arr_copy[j]
                     j_max = j
             if self._verbose:
-                print("j_max = ",j_max)
-                print("len(arr_copy),i = ",len(arr_copy),i)
+              print(arr_copy)
             arr_copy[len(arr_copy)-i-1],arr_copy[j_max] = \
                     arr_copy[j_max],arr_copy[len(arr_copy)-i-1]
         return arr_copy
