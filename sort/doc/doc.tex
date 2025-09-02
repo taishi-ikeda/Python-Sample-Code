@@ -1,0 +1,237 @@
+\documentclass[dvipdfmx]{jarticle}
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{itembkbx}
+\usepackage{boites,boites_exemples}
+\usepackage{lipsum}
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{ascmac}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{%
+  language={Python},
+  basicstyle={\small},%
+  identifierstyle={\small},%
+  commentstyle={\small\itshape\color[rgb]{0,0.5,0}},%
+  keywordstyle={\small\bfseries\color[rgb]{0,0,1}},%
+  ndkeywordstyle={\small},%
+  stringstyle={\small\ttfamily\color[rgb]{1,0,1}},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},%
+  numbers=left,%
+  xrightmargin=0zw,%
+  xleftmargin=3zw,%
+  numberstyle={\scriptsize},%
+  stepnumber=1,
+  numbersep=1zw,%
+  lineskip=-0.5ex%
+}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary {shapes.misc}
+\usetikzlibrary{positioning}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\title{ソートのアルゴリズム}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\section{はじめに}
+与えられた実数の並びを規則に従って並べ替えることをソートと呼びます。ソートのアルゴリズムはすでにさまざまに研究がされており、
+各種プログラミングですでに実装されています。このノートではアルゴリズムの勉強のためにソートの有名どころのアルゴリズムを実装
+してみます。
+
+まず、アルゴリズムそのものの説明に入る前にソートとは何かを例で見てみます。
+例えば、以下の実数の並びが与えられているとします。
+\begin{eqnarray}
+4,~8,~1,~-3,~5.1,~-7.2,~10
+\end{eqnarray}
+これを小さな数字順、すなわち左が小さな数字、右が大きな数字になるように並び替えると以下のようになります。
+\begin{eqnarray}
+-7.2,~-3,~1,~4,~5.1,~8,~10
+\end{eqnarray}
+このようにある一定の規則に従って並べ替えることをソートと呼びます。この並べ替えは必ずしも小さな数字順で
+ある必要はなく大きな数字から順に小さな数字へと並べていっても構いません。ただし以下ではこのノードではソートというとき
+小さな数字の順番に並べることを意味するとします。
+
+上にあげた問題は数字が７つでしたのでソートを行うのに大した手間ではなかったですが、
+実際のデータを扱うときにはずっと大きな文字の並びになることもあるでしょう。そのようなときに如何に効率的に
+ソートを行うのかは古くからある重要な問題です。このノートではよく知られているアルゴリズムとしてバブルソート、
+セレクションソート、インサーションソート、シェルソート、ヒープソート、クイックソート、マージソート
+について扱います。それぞれのアルゴリズムについてPythonで実装したものをgithubに挙げています。
+
+\section{アルゴリズムと実装}
+それではそれぞれのアルゴリズムの詳細について説明していきます。以下では数字の列の大きさを$n$とします。
+\subsection{バブルソート}
+与えられた数字の列に対してソートの後の数字の列の並び合う数字を比較すると左の数字より右の数字が大きいはずです。
+このことから順番に隣り合う数字を確認していって左の数字が右のより大きければ入れ替えるという操作をすることでソートを
+実現できそうなことがわかります。この考え方を使ってバブルソートでは、列の先頭から順番に隣り合う数字を比較していき
+左の数字が右の数字より大きな数字のときには、数字を入れ替えるという作業を行います。この操作を最後まで行うと列の
+1番右側(n番目)に一番大きな数字が来ることがわかります。このとき一番右の数字以外はまだソートが完了していません。
+そこで、次に列の先頭からn-1番目の数字までを同様に隣同士の大小比較をして数字を並べ替えていきます。以下、順番に繰り返していくことで
+最終的にソートされた数字の列を得ることができます。
+
+具体的にこのアルゴリズムを見るために以下の数字の列を考えます。
+\begin{eqnarray}\label{example init}
+5, 4, 8, 1, 3, 2, 7, 6
+\end{eqnarray}
+まず、先頭の数字から隣り合う数字を比較して順番に最後まで数字を並べ替えていくと以下のようになります。
+\begin{eqnarray}
+4, 5, 8, 1, 3, 2, 7, 6\\
+4, 5, 1, 8, 3, 2, 7, 6\\
+4, 5, 1, 3, 8, 2, 7, 6\\
+4, 5, 1, 3, 2, 8, 7, 6\\
+4, 5, 1, 3, 2, 7, 8, 6\\
+4, 5, 1, 3, 2, 7, 6, 8
+\end{eqnarray}
+この段階で一番右の数字が、最大の数になっていることがわかります。一方で、他の箇所についてはまだ数字が小さな順に並んでいません。
+そこで再び先頭から隣り合う数字の大小関係に基づいて数字を並べ替えていきます。
+\begin{eqnarray}
+4, 5, 1, 3, 2, 7, 6, 8\\
+4, 1, 5, 3, 2, 7, 6, 8\\
+4, 1, 3, 5, 2, 7, 6, 8\\
+4, 1, 3, 2, 5, 7, 6, 8\\
+4, 1, 3, 2, 5, 6, 7, 8
+\end{eqnarray}
+これで最後の数字二つはソートされていることがわかります。この手続きを繰り返すと、
+\begin{eqnarray}
+4, 1, 3, 2, 5, 6, 7, 8\\
+1, 4, 3, 2, 5, 6, 7, 8\\
+1, 3, 4, 2, 5, 6, 7, 8\\
+1, 3, 2, 4, 5, 6, 7, 8\\
+1, 2, 3, 4, 5, 6, 7, 8\\
+1, 2, 3, 4, 5, 6, 7, 8
+\end{eqnarray}
+となり、最終的に全体がソートされた結果が得られます。
+このアルゴリズムを疑似コードで書くと以下のようになります。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{bubble sort}
+	\label{bubble sort}
+	\begin{algorithmic}[1]  
+    	\FOR{$i=0;i<n-1;++i$}
+	\FOR{$j=0;j<n-i-1;++j$}
+    	\IF{$data[i] > data[i+1]$}
+    	\STATE data[i]とdata[i+1]を入れ替える
+	\ENDIF
+	\ENDFOR
+	\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+このアルゴリズムはforループの繰り返しの数から計算量はおおよそ
+\begin{eqnarray}
+\sum_{i=0}^{n-1}(n-i)
+\end{eqnarray}
+となるので、$\mathcal{O}(n^{2})$となる。
+\subsection{セレクションソート}
+セレクションソートでは、数字の列から最大の数を探してきて$n$番目の数字と入れ替えます。
+次に先頭から$n-1$番目の数字の中から最大の数を探して出して、$n-1$番目の数字と入れ替えます。
+以下同様に繰り返すとソートを実現できます。
+
+セレクションソートを実際に行った例を以下に示します。最初の数字の列は式(\ref{example init})で与えられるとします。
+まず、最大の数字を探すと$8$であることがわかるので最後の数字である6と入れ替えます。
+\begin{eqnarray}
+5, 4, 6, 1, 3, 2, 7, 8
+\end{eqnarray}
+次に先頭から7番目までの数字の中から最大のものを選んできます。ここでは7で7番目にあるので特に入れ替えは行いません。
+\begin{eqnarray}
+5, 4, 6, 1, 3, 2, 7, 8
+\end{eqnarray}
+先頭から6番目までの数字の中から最大の数字を選ぶと6なので6番目の数字である2と入れ替えます。
+\begin{eqnarray}
+5, 4, 2, 1, 3, 6, 7, 8
+\end{eqnarray}
+以下同様にして行うと
+\begin{eqnarray}
+3, 4, 2, 1, 5, 6, 7, 8\\
+3, 1, 2, 4, 5, 6, 7, 8\\
+2, 1, 3, 4, 5, 6, 7, 8\\
+1, 2, 3, 4, 5, 6, 7, 8\\
+1, 2, 3, 4, 5, 6, 7, 8
+\end{eqnarray}
+となり、最終的にソートされた数字の列が得られます。
+
+セレクションソートを疑似コードを使って書くと以下のようになります。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{selection sort}
+	\label{selection sort}
+	\begin{algorithmic}[1]  
+    	\FOR{$i=0;i<n;++i$}
+    	\STATE $0~n-i-1$までの中から最大のものを探して$n-i-1$番目の数字と入れ替える。
+	\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+このアルゴリズムはforループの繰り返しの中で最大値を探すために$n-i-2$回の比較が必要です。
+そのためアルゴリズムの計算量として$\mathcal{O}(n^{2})$となる。
+\subsection{インサーションソート}
+インサーションソートではソートされていない部分から要素と取り出してソートされた場所の適切な位置に挿入するアルゴリズムです。
+挿入するときには、挿入する位置より右側のデータを全て一つずつずらす必要があります。
+
+以下に具体的に見てみます。再び最初の数字の列は式(\ref{example init})で与えられるとします。
+最初に一番先頭の数字$5$はすでに１つのソートされた列だとします。
+このとき未ソートの領域(2番目からn番目)から数字を選んでソートされた領域の適切な位置に挿入します。
+ここでは2番目の数字4を選んで挿入します。
+\begin{eqnarray}
+4, 5,| 8, 1, 3, 2, 7, 6
+\end{eqnarray}
+列の中の$|$より左がソート済み領域、右が未ソート領域となっています。
+ここまでで、先頭から2番目までソートされた領域になります。次に3番目以降の未ソートの領域から数字をとってきます。ここで
+3番目の数字8をとってきます。これをソート領域に挿入すると挿入位置は3番目なので特に並び替えは起こりません。
+\begin{eqnarray}
+4, 5, 8,| 1, 3, 2, 7, 6
+\end{eqnarray}
+次に未ソート領域内の4番目の数字をソート済み領域に挿入します。
+\begin{eqnarray}
+1, 4, 5, 8,| 3, 2, 7, 6
+\end{eqnarray}
+以下同様に繰り返すと
+\begin{eqnarray}
+1, 3, 4, 5, 8,| 2, 7, 6\\
+1, 2, 3, 4, 5, 8,| 7, 6\\
+1, 2, 3, 4, 5, 7, 8,| 6\\
+1, 2, 3, 4, 5, 6, 7, 8|
+\end{eqnarray}
+となり最終的に全ての領域がソートされた列となります。
+
+インサーションソートを疑似コードで書くと以下のとおりです。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{insertion sort}
+	\label{insertion sort}
+	\begin{algorithmic}[1]  
+    	\FOR{$i=1;i<n;++i$}
+	\STATE $x={\rm data}[i]$
+	\STATE $j=i$
+	\WHILE{$j-1>0$ and ${\rm data}[j-1]>x$}
+    	\STATE ${\rm data}[j] = {\rm data}[j-1]$
+	\STATE $j = j-1$
+	\ENDWHILE
+	\STATE ${\rm data}[j] = x$
+	\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+インサーションソートの計算時間を考えるために最悪の場合として入力が数字が大きい順に並んでいるとします。
+このときには、ソート済み領域に次の数字を挿入するたびに全ての列を一つずつずらしていく必要があるため、
+計算量は$\mathcal{O}(n^{2})$となります。一方で、入力がほとんど小さい順番に並んでいるときには
+列をずらす操作がほとんど不要となり、結局n回の数字の比較で済みます。ゆえにその場合には計算時間は$\mathcal{O}(n)$となります。
+\subsection{シェルソート}
+バブルソートやインサーションソートはデータを一つずつ移動していくため効率が悪くなります。そこで$h>1$を適当に決めて$h$ずつ飛び飛びで比較して
+データの交換を行う方法が考えられます。これを$h$-整列といいます。
+
+\begin{thebibliography}{9}
+\item 辻真吾、下平英寿、「Pythonで学ぶアルゴリズムとデータ構造」
+\end{thebibliography}
+
+\end{document}

@@ -20,7 +20,10 @@ SortSelection = ss.selection_sort(True)
 arr_selection = SortSelection.execute(arr)
 print(arr_selection)
 
-
+print("insertion sort")
+SortInsertion = si.insertion_sort(True)
+arr_insertion = SortInsertion.execute(arr)
+print(arr_insertion)
 
 print("merge sort")
 SortMerge = sm.merge_sort(False)
@@ -32,10 +35,6 @@ SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
 
-
-SortInsertion = si.insertion_sort(False)
-arr_insertion = SortInsertion.execute(arr)
-print(arr_insertion)
 
 SortShell = ssh.shell_sort(False)
 arr_shell = SortShell.execute(arr)
