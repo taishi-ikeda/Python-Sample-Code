@@ -12,12 +12,15 @@ class shell_sort(sort_base.sort_base):
         gap=len_arr_2
         while gap>0:
             for i in range(gap,len(arr_copy)):
-                j=i-gap
-                while(j>=0 and \
-                        arr_copy[j] > arr_copy[j+gap]):
-                    arr_copy[j],arr_copy[j+gap] = \
-                            arr_copy[j+gap],arr_copy[j]
+                temp = arr_copy[i]
+                j=i
+                while(j>=gap and \
+                        arr_copy[j - gap] > temp):
+                    arr_copy[j] = arr_copy[j-gap]
                     j = j-gap
+                arr_copy[j] = temp
+                if self._verbose:
+                  print(arr_copy)
             gap = round(gap*0.5)
         return arr_copy
 

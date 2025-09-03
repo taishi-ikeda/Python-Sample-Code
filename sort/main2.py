@@ -25,6 +25,11 @@ SortInsertion = si.insertion_sort(True)
 arr_insertion = SortInsertion.execute(arr)
 print(arr_insertion)
 
+print("shell sort")
+SortShell = ssh.shell_sort(True)
+arr_shell = SortShell.execute(arr)
+print(arr_shell)
+
 print("merge sort")
 SortMerge = sm.merge_sort(False)
 arr_merge=SortMerge.execute(arr)
@@ -34,11 +39,6 @@ print(arr_merge)
 SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
-
-
-SortShell = ssh.shell_sort(False)
-arr_shell = SortShell.execute(arr)
-print(arr_shell)
 
 SortHeap = sh.heap_sort(False,1000)
 arr_heap = SortHeap.execute(arr)
