@@ -5,9 +5,10 @@ import sort_selection as ss
 import sort_insertion as si
 import sort_shell as ssh
 import sort_heap as sh
+import sort_heap2 as sh2
 import random
 
-arr = [5,4,8,1,3,2,7,6]
+arr = [5, 4, 8, 1, 3, 2, 7, 6]
 
 print(arr)
 print("bubble sort")
@@ -31,22 +32,21 @@ arr_shell = SortShell.execute(arr)
 print(arr_shell)
 
 print("heap sort")
-SortHeap = sh.heap_sort(True,10)
+SortHeap = sh.heap_sort(True, 10)
 arr_heap = SortHeap.execute(arr)
 print(arr_heap)
 
+print("heap sort2")
+SortHeap2 = sh2.heap_sort2(True)
+arr_heap2 = SortHeap2.execute(arr)
+print(arr_heap2)
+
 print("merge sort")
 SortMerge = sm.merge_sort(False)
-arr_merge=SortMerge.execute(arr)
+arr_merge = SortMerge.execute(arr)
 print(arr_merge)
-
 
 
 SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
-
-
-
-
-
