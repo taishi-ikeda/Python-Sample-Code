@@ -47,7 +47,7 @@ arr_quick = SortQuick.execute(arr)
 print(arr_quick)
 
 print("merge sort")
-SortMerge = sm.merge_sort(False)
+SortMerge = sm.merge_sort(True)
 arr_merge = SortMerge.execute(arr)
 print(arr_merge)
 

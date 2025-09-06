@@ -726,10 +726,118 @@ $\mathcal{O}(n{\rm log}(n))$程度となります。
 ３、４行目に入力配列が空の場合の処理が書かれています。クイックソートのような再帰的に関数が呼び出されるアルゴリズムの場合には、こうした処理を正しく書いておかないと
 無限ループに入ってしまうなどバグの原因となるので注意してください。
 \subsection{マージソート}
-
-
+マージソートではソートされた二つの配列をソートされた一つの配列にマージするアルゴリズムを用いたソートです。
+まずソートされた二つの配列から一つのソートされた配列を作るアルゴリズムについて考えます。
+今配列として配列$A,B$があるとします。$A,B$はともにソートされているとします。マージ後の配列として空の配列$C$を用意しておきます。また配列$A,B$の要素をさすポインタを$a,b$としてはじめに$a,b$は$A,B$の先頭を指しているとします。
+はじめに$A$と$B$の配列の$a,b$が指している要素（配列の先頭）を見て小さな値の方を選びます。今仮に$A$の先頭の方が$B$の先頭より小さかったとします。するとまず$A$の先頭の数字を$C$に追加します。
+追加後に$a$を一つ進めます。一つ進めた後再び$a$と$b$の指している要素を比較して配列$C$に追加します。追加した方の配列のポインタを一つ進めて、どちらかのポインタが配列の末端に来たら、残ったもう片方の配列の要素を
+全部$C$に追加します。このようにして作られた配列$C$は配列$A,B$の要素を二つ持つソートされた配列となります。
+このアルゴリズムを疑似コードで書くと以下のようになります。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{merge array}
+	\label{merge array}
+	\begin{algorithmic}[1] 
+	\STATE A: ソートされた入力配列
+	\STATE $n_A$:配列$A$の長さ
+	\STATE B:ソートされた入力配列
+	\STATE $n_B$:配列$B$の長さ
+	\STATE C:ソート後の配列（最初は空）
+	\STATE $a=0$
+	\STATE $b=0$
+	\WHILE{$a < n_{A} \& b < n_{B}$}
+	\IF{$A[a] < B[b]$}
+	\STATE C.append(A[a])
+	\STATE a++
+	\ELSE
+	\STATE C.append(B[b])
+	\STATE b++
+	\ENDIF
+	\ENDWHILE
+	\IF{$a==n_{A}$}
+	\FOR{$i=b;i<n_{B};++i$}
+	\STATE C.append(B[i])
+	\ENDFOR
+	\ELSE
+	\FOR{$i=a;i<n_{A};++i$}
+	\STATE C.append(A[i])
+	\ENDFOR
+	\ENDIF
+	\STATE return C
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+このmearge\_arrayのアルゴリズムを使って配列のソートを考えるます。要素が一つだけの配列は自明にソートされているとみなすことができるので
+与えられた配列を要素一つの配列に分割して順番にmerge\_arrayを実行していけば良いことがわかります。そこでソートしたいデータを分割して配列の配列を
+作って、その要素である配列を順にマージしていくことでソートができると考えられます。このアルゴリズムを疑似コートで書くと以下の通りです。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{step}
+	\label{step}
+	\begin{algorithmic}[1] 
+	\STATE arr: 配列の配列
+	\STATE n:arrの長さ
+	\STATE ret = []
+	\IF{n\%2 == 0}
+	\FOR{$i=0;i<n;i=i+2$}
+	\STATE ret.append(merge\_array(arr[i],arr[i+1]))
+	\ENDFOR
+	\ELSE
+	\FOR{$i=0;i<n-1;i=i+2$}
+	\STATE ret.append(merge\_array(arr[i],arr[i+1]))
+	\ENDFOR
+	\STATE ret.append(arr[n-1])
+	\ENDIF
+	\STATE return ret
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+このstepという関数はarrという配列の配列が与えられた時、二つずつmerge\_arrayに従ってマージをしていきます。このstepを繰り返し呼ぶことで最終的にソートされた配列が得られます。
+\begin{figure}[H]
+\begin{algorithm}[H]
+	\caption{merge\_sort}
+	\label{merge_sort}
+	\begin{algorithmic}[1] 
+	\STATE data:入力配列
+	\STATE n:dataの長さ
+	\STATE ret = [] //配列の配列を格納する
+	\FOR{$i=0;i<n;++i$}
+	\STATE ret.append([data[i]])
+	\ENDFOR
+	\WHILE{size of ret[0] != n}
+	\STATE ret = step(ret)
+	\ENDWHILE
+	\STATE return ret
+	\end{algorithmic}
+\end{algorithm}
+\end{figure}
+このアルゴリズムを実際に式(\ref{example init})に対して行なっています。まず要素を分割して１要素の配列の配列を作成します。
+\begin{eqnarray}
+[[5],[4], [8], [1], [3], [2],[7], [6]]
+\end{eqnarray}
+１つおきにmerge\_arrayを使ってマージを行なっていきます。最初のマージで
+\begin{eqnarray}
+[[4, 5], [1, 8],[2, 3], [6, 7]]
+\end{eqnarray}
+となり、次のマージで
+\begin{eqnarray}
+[[1, 4, 5, 8],[2, 3, 6, 7]]
+\end{eqnarray}
+を得ます。もう一度マージを行うと所望の結果を得ることができます。
+このアルゴリズムでは、マージ後の配列の配列がほとんど同じ長さの配列で構成されることで計算効率が上がっています。
+マージソートは２分木として書くこともでき、その深さは$\mathcal{O}({\rm log}(n))$となります。マージはたかだかn回なので全体としは$\mathcal{O}(n{\rm log}(n))$程度の計算量となります。
+\section{ソートの計算量について}
+紹介したアルゴリズムの中で最も計算量の少ないアルゴリズムは$\mathcal{O}(n{\rm log}(n))$の計算量でした。実はソートアルゴリズムではこれよりも効率的なアルゴリズムは存在しないことがわかっています。
+ここではその点について説明をしていきたいと思います。
+いまソートしたい配列が長さ$n$で要素は全て異なっているとします。ソートでは二つの要素$a_{i}$と$a_{j}$を比較して入れ替えるかどうかが基本的な操作でした。この入れ替えるかどうかの可能性の分岐を２分木で
+表すことができます。ソートのアルゴリズムを決めるとこの比較と対応する二分木が決まります。一方長さ$n$の配列に対して可能な配列の並びは$n!$です。そのため。二分木で全ての可能な配列の順序を得ようとすると
+二分木の深さ$k$は
+\begin{eqnarray}
+k\sim {\rm log}n!
+\end{eqnarray}
+で与えれ、これはおよそ$\mathcal{O}(n{\rm log}(n))$となります。つまり最低でも$\mathcal{O}(n{\rm log}(n))$の深さの二分木でないと全ての配列の可能性を網羅できません。二分木を辿っていく過程がソートのアルゴリズムの過程に
+対応しているので結局必要な計算量は$\mathcal{O}(n{\rm log}(n))$として見積もれることがわかります。
 \begin{thebibliography}{9}
 \item 辻真吾、下平英寿、「Pythonで学ぶアルゴリズムとデータ構造」
 \end{thebibliography}
-
 \end{document}
