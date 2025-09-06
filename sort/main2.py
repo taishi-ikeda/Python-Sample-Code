@@ -30,19 +30,21 @@ SortShell = ssh.shell_sort(True)
 arr_shell = SortShell.execute(arr)
 print(arr_shell)
 
+print("heap sort")
+SortHeap = sh.heap_sort(True,10)
+arr_heap = SortHeap.execute(arr)
+print(arr_heap)
+
 print("merge sort")
 SortMerge = sm.merge_sort(False)
 arr_merge=SortMerge.execute(arr)
 print(arr_merge)
 
 
+
 SortQuick = sp.quick_sort(False)
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
-
-SortHeap = sh.heap_sort(False,1000)
-arr_heap = SortHeap.execute(arr)
-print(arr_heap)
 
 
 
