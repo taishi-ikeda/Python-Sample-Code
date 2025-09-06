@@ -27,10 +27,12 @@ class heap_sort2(sort_base.sort_base):
                     j = 2 * i
                 else:
                     break
-                if self._verbose:
-                    print(arr_copy)
             arr_copy[i - 1] = x
+            if self._verbose:
+              print(arr_copy)
 
+        if self._verbose:
+          print("finish push heap")
         for k in range(n - 1, 0, -1):
             x = arr_copy[k]
             arr_copy[k] = arr_copy[0]
@@ -45,7 +47,7 @@ class heap_sort2(sort_base.sort_base):
                     j = 2 * i
                 else:
                     break
-                if self._verbose:
-                    print(arr_copy)
             arr_copy[i - 1] = x
+            if self._verbose:
+              print(arr_copy)
         return arr_copy
