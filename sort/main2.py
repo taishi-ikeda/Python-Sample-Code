@@ -41,12 +41,15 @@ SortHeap2 = sh2.heap_sort2(True)
 arr_heap2 = SortHeap2.execute(arr)
 print(arr_heap2)
 
+print("quick sort")
+SortQuick = sp.quick_sort(True,"head")
+arr_quick = SortQuick.execute(arr)
+print(arr_quick)
+
 print("merge sort")
 SortMerge = sm.merge_sort(False)
 arr_merge = SortMerge.execute(arr)
 print(arr_merge)
 
 
-SortQuick = sp.quick_sort(False)
-arr_quick = SortQuick.execute(arr)
-print(arr_quick)
+

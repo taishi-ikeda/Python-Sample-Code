@@ -18,7 +18,7 @@ SortBubble = sb.bubble_sort(False)
 arr_bubble = SortBubble.execute(arr)
 print(arr_bubble)
 
-SortQuick = sp.quick_sort(False)
+SortQuick = sp.quick_sort(False,"random")
 arr_quick = SortQuick.execute(arr)
 print(arr_quick)
 
