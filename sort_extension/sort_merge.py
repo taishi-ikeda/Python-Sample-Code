@@ -1,11 +1,11 @@
 import sort_base
 
-class merge_sort(sort_base.sort_base):
-    def __init__(self,verbose:bool,\
-                 func:sort_base.order_func_base)->None:
-        super().__init__(verbose,func)
 
-    def merge_array(self,l:list[int],r:list[int])->list[int]:
+class merge_sort(sort_base.sort_base):
+    def __init__(self, verbose: bool, func: sort_base.order_func_base) -> None:
+        super().__init__(verbose, func)
+
+    def merge_array(self, l: list[int], r: list[int]) -> list[int]:
         if not super().check_sort(l):
             print("input in merge array must be sorted!!")
             return []
@@ -14,9 +14,9 @@ class merge_sort(sort_base.sort_base):
             print("input in merge array must be sorted!!")
             return []
 
-        res=[]
-        i,j=0,0
-        ll,rl = len(l),len(r)
+        res = []
+        i, j = 0, 0
+        ll, rl = len(l), len(r)
         while i < ll and j < rl:
             if self._func.get(l[i]) < self._func.get(r[j]):
                 res.append(l[i])
@@ -26,27 +26,26 @@ class merge_sort(sort_base.sort_base):
                 j += 1
         return res + l[i:] + r[j:]
 
-    def step(self,arr:list[list[int]])->list[list[int]]:
+    def step(self, arr: list[list[int]]) -> list[list[int]]:
         res = []
-        if len(arr)%2==0:
-            for i in range(0,len(arr),2):
+        if len(arr) % 2 == 0:
+            for i in range(0, len(arr), 2):
                 a1 = arr[i]
-                a2 = arr[i+1]
-                res.append(self.merge_array(a1,a2))
+                a2 = arr[i + 1]
+                res.append(self.merge_array(a1, a2))
         else:
-            for i in range(0,len(arr)-1,2):
+            for i in range(0, len(arr) - 1, 2):
                 a1 = arr[i]
-                a2 = arr[i+1]
-                res.append(self.merge_array(a1,a2))
-            res.append(arr[len(arr)-1])
+                a2 = arr[i + 1]
+                res.append(self.merge_array(a1, a2))
+            res.append(arr[len(arr) - 1])
         return res
 
-    def execute(self,arr:list[int])->list[int]:
+    def execute(self, arr: list[int]) -> list[int]:
         res = [[v] for v in arr]
         while len(res[0]) != len(arr):
             self._step_counter += 1
             if self._verbose:
-                print("step_counter : ",self._step_counter,res)
+                print("step_counter : ", self._step_counter, res)
             res = self.step(res)
         return res[0]
-
