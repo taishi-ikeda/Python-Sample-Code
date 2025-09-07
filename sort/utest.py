@@ -17,7 +17,7 @@ class TestSort(unittest.TestCase):
         SortBubble = sb.bubble_sort(False)
         arr_bubble = SortBubble.execute(arr)
 
-        SortQuick = sp.quick_sort(False)
+        SortQuick = sp.quick_sort(False,"random")
         arr_quick = SortQuick.execute(arr)
 
         SortSelection = ss.selection_sort(False)
@@ -46,7 +46,7 @@ class TestSort(unittest.TestCase):
         SortBubble = sb.bubble_sort(False)
         arr_bubble = SortBubble.execute(arr)
 
-        SortQuick = sp.quick_sort(False)
+        SortQuick = sp.quick_sort(False,"random")
         arr_quick = SortQuick.execute(arr)
 
         SortSelection = ss.selection_sort(False)
