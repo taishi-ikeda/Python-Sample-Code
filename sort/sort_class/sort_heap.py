@@ -70,7 +70,6 @@ class heap_sort(sort_base.sort_base):
             if self._verbose:
                 print(self._heap)
         sorted_arr = [0] * len(arr)
-        # print(self._heap)
         for i in range(0, len(arr)):
             fl, x = self.delete_max_heap()
             if fl:

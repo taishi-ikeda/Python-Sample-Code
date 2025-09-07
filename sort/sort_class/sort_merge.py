@@ -8,11 +8,11 @@ class merge_sort(sort_base.sort_base):
         super().__init__(verbose)
 
     def merge_array(self, l: list[int], r: list[int]) -> list[int]:
-        #if not super().check_sort(l):
+        # if not super().check_sort(l):
         #    print("input in merge array must be sorted!!")
         #    return []
 
-        #if not super().check_sort(r):
+        # if not super().check_sort(r):
         #    print("input in merge array must be sorted!!")
         #    return []
 
@@ -41,7 +41,7 @@ class merge_sort(sort_base.sort_base):
                 a2 = arr[i + 1]
                 res.append(self.merge_array(a1, a2))
             res.append(arr[len(arr) - 1])
-        #if self._verbose:
+        # if self._verbose:
         #  print(res)
         return res
 
