@@ -837,6 +837,19 @@ k\sim {\rm log}n!
 \end{eqnarray}
 で与えれ、これはおよそ$\mathcal{O}(n{\rm log}(n))$となります。つまり最低でも$\mathcal{O}(n{\rm log}(n))$の深さの二分木でないと全ての配列の可能性を網羅できません。二分木を辿っていく過程がソートのアルゴリズムの過程に
 対応しているので結局必要な計算量は$\mathcal{O}(n{\rm log}(n))$として見積もれることがわかります。
+\section{TAT計測}
+ 最後にそれぞれのアルゴリズムのTATを計測しました。計測では配列の大きさを100から4000まで100間隔で変化させました。
+ それぞれの配列の大きさで10回ずつ乱数で配列を生成し、その配列を並び替えて10回のTATの平均をプロットしています。
+ \begin{figure}[h]
+ \begin{center}
+\includegraphics[width=100mm]{time_measure.png}
+\end{center}
+\end{figure}
+ \begin{figure}[h]
+ \begin{center}
+\includegraphics[width=100mm]{time_measure2.png}
+\end{center}
+\end{figure}
 \begin{thebibliography}{9}
 \item 辻真吾、下平英寿、「Pythonで学ぶアルゴリズムとデータ構造」
 \end{thebibliography}
