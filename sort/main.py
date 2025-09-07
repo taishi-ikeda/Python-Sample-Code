@@ -1,11 +1,11 @@
-import sort_merge as sm
-import sort_bubble as sb
-import sort_quick as sp
-import sort_selection as ss
-import sort_insertion as si
-import sort_shell as ssh
-import sort_heap as sh
-import sort_heap2 as sh2
+import sort_class.sort_merge as sm
+import sort_class.sort_bubble as sb
+import sort_class.sort_quick as sp
+import sort_class.sort_selection as ss
+import sort_class.sort_insertion as si
+import sort_class.sort_shell as ssh
+import sort_class.sort_heap as sh
+import sort_class.sort_heap2 as sh2
 import random
 
 arr = [random.randint(-100, 100) for i in range(20)]

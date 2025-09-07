@@ -1,10 +1,10 @@
 import unittest
-import sort_merge as sm
-import sort_bubble as sb
-import sort_quick as sp
-import sort_selection as ss
-import sort_heap as sh
-import sort_heap2 as sh2
+import sort_class.sort_merge as sm
+import sort_class.sort_bubble as sb
+import sort_class.sort_quick as sp
+import sort_class.sort_selection as ss
+import sort_class.sort_heap as sh
+import sort_class.sort_heap2 as sh2
 
 
 class TestSort(unittest.TestCase):

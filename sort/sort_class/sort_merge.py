@@ -1,4 +1,4 @@
-import sort_base
+from . import sort_base
 
 
 class merge_sort(sort_base.sort_base):
