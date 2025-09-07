@@ -1,4 +1,4 @@
-import sort_base
+from . import sort_base
 import copy
 
 

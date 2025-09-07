@@ -1,8 +1,8 @@
 import unittest
-import sort_merge as sm
-import sort_bubble as sb
-import sort_quick as sp
-import sort_base
+from sort_extension_class import sort_merge as sm
+from sort_extension_class import sort_bubble as sb
+from sort_extension_class import sort_quick as sp
+from sort_extension_class import sort_base
 
 
 class opposite_order(sort_base.order_func_base):

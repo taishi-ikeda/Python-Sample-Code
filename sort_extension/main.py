@@ -1,12 +1,12 @@
-import sort_merge as sm
-import sort_bubble as sb
-import sort_quick as sp
-import sort_heap as sh
-import sort_heap2 as sh2
-import sort_insertion as si
-import sort_selection as ss
-import sort_shell as ssh
-import sort_base
+from sort_extension_class import sort_merge as sm
+from sort_extension_class import sort_bubble as sb
+from sort_extension_class import sort_quick as sp
+from sort_extension_class import sort_heap as sh
+from sort_extension_class import sort_heap2 as sh2
+from sort_extension_class import sort_insertion as si
+from sort_extension_class import sort_selection as ss
+from sort_extension_class import sort_shell as ssh
+from sort_extension_class import sort_base
 import random
 
 
