@@ -5,7 +5,8 @@ import random
 class quick_sort(sort_base.sort_base):
     __slots__ = ("_pivot_selection")
 
-    def __init__(self, verbose: bool, pivot_selection: str) -> None:
+    def __init__(self, verbose: bool,
+                 pivot_selection: str="random") -> None:
         super().__init__(verbose)
         self._pivot_selection = pivot_selection
 

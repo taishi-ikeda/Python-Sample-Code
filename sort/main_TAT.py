@@ -1,11 +1,4 @@
-import sort_class.sort_merge as sm
-import sort_class.sort_bubble as sb
-import sort_class.sort_quick as sp
-import sort_class.sort_selection as ss
-import sort_class.sort_insertion as si
-import sort_class.sort_shell as ssh
-import sort_class.sort_heap as sh
-import sort_class.sort_heap2 as sh2
+import sort_class.sort_factory as sf
 import time
 import random
 import matplotlib.pyplot as plt
@@ -24,14 +17,15 @@ y_list_heap = []
 y_list_heap2 = []
 y_list_shell = []
 
-SortMerge = sm.merge_sort(False)
-SortBubble = sb.bubble_sort(False)
-SortQuick = sp.quick_sort(False,"random")
-SortSelection = ss.selection_sort(False)
-SortInsertion = si.insertion_sort(False)
-SortShell = ssh.shell_sort(False)
-SortHeap = sh.heap_sort(False, 100000)
-SortHeap2 = sh2.heap_sort2(False)
+SortMerge = sf.sort_factory.create("merge",False)
+SortBubble = sf.sort_factory.create("bubble",False)
+SortQuick = sf.sort_factory.create("quick",False,
+                            pivot_selection="random")
+SortSelection = sf.sort_factory.create("selection",False)
+SortInsertion = sf.sort_factory.create("insertion",False)
+SortShell = sf.sort_factory.create("shell",False)
+SortHeap = sf.sort_factory.create("heap",False, 100000)
+SortHeap2 = sf.sort_factory.create("heap2",False)
 
 
 for l in range(100, 4000, 100):
