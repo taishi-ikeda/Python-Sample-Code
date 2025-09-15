@@ -1,22 +1,26 @@
 import search_class.search_factory as sf
 import random
 
+sample_list = [65,210]
+
 arr = [random.randint(-200, 200) for i in range(100)]
 print(arr)
 SearchSequential = sf.search_factory.create("sequential", False)
-flag = SearchSequential.execute(arr, 65)
-print("SearchSequential :", flag)
-flag = SearchSequential.execute(arr, -100)
-print("SearchSequential :", flag)
+for i in sample_list:
+    flag = SearchSequential.execute(arr, i)
+    print("SearchSequential :", flag)
 
 SearchSequentialSort = sf.search_factory.create("sequential_sort", False)
-flag = SearchSequentialSort.execute(arr, 65)
-print("SearchSequentialSort : ", flag)
-flag = SearchSequentialSort.execute(arr, -100)
-print("SearchSequentialSort : ", flag)
+for i in sample_list:
+    flag = SearchSequentialSort.execute(arr, i)
+    print("SearchSequentialSort : ", flag)
 
 SearchMBlock = sf.search_factory.create("mblock", False)
-flag = SearchMBlock.execute(arr, 65)
-print("SearchMBlock : ", flag)
-flag = SearchMBlock.execute(arr, -100)
-print("SearchMBlock : ", flag)
+for i in sample_list:
+    flag = SearchMBlock.execute(arr, i)
+    print("SearchMBlock : ", flag)
+
+SearchBinary = sf.search_factory.create("binary", False)
+for i in sample_list:
+    flag = SearchBinary.execute(arr, i)
+    print("SearchBinary : ", flag)
