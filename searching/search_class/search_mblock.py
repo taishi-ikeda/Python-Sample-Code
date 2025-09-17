@@ -4,17 +4,25 @@ import math
 
 
 class mblock_search(search_base.search_base):
-    __slots__ = "_sort"
+    __slots__ = ("_sort",
+                 "_data",
+                 "_m_block")
 
-    def __init__(self, verbose: bool, sort_method: str = "quick") -> None:
+    def __init__(self, verbose: bool,
+                 sort_method: str = "quick",
+                 m_block:int=-1) -> None:
         super().__init__(verbose)
         self._sort = sf.sort_factory.create(sort_method)
+        self._data = []
 
-    def execute(self, arr: list[int], x: int, m_block: int = -1) -> bool:
-        size = len(arr)
+    def append(self,x:int):
+        self._data.append(x)
+
+    def find(self, x: int, m_block: int = -1) -> bool:
+        size = len(self._data)
         if m_block == -1:
             m_block = int(math.sqrt(size))
-        sorted_arr = self._sort.execute(arr)
+        sorted_arr = self._sort.execute(self._data)
 
         if self._verbose:
             print(sorted_arr)

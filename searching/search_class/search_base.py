@@ -9,5 +9,9 @@ class search_base(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def execute(self, arr: list[int]) -> bool:
+    def find(self, arr: list[int]) -> bool:
+        pass
+
+    @abstractmethod
+    def append(self, x: int)->None:
         pass

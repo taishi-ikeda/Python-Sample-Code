@@ -100,9 +100,10 @@ class binary_tree_search(search_base.search_base):
         super().__init__(verbose)
         self._btree = binary_search_tree()
 
-    def execute(self, arr: list[int], x: int) -> bool:
-        for i in arr:
-            self._btree.add_node(i)
+    def append(self,x:int) -> None:
+        self._btree.add_node(x)
+
+    def find(self, arr: list[int], x: int) -> bool:
         if self._verbose:
             print(str(self._btree))
 

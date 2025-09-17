@@ -27,11 +27,7 @@ class hash_search(search_base.search_base):
         self._data[v_hash].append(v)
 
 
-    def execute(self, arr: list[int], x: int) -> bool:
-        self._data = [[] for i in range(self._table_size)]
-        for v in arr:
-            self.append(v)
-
+    def find(self, x: int) -> bool:
         if self._verbose:
             print(self._data)
 
