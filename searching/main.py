@@ -24,3 +24,15 @@ SearchBinary = sf.search_factory.create("binary", False)
 for i in sample_list:
     flag = SearchBinary.execute(arr, i)
     print("SearchBinary : ", flag)
+
+SearchBinaryTree = sf.search_factory.create("binary_tree", False)
+for i in sample_list:
+    flag = SearchBinaryTree.execute(arr, i)
+    print("SearchBinaryTree : ", flag)
+
+SearchHash = sf.search_factory.create("hash", True)
+for i in sample_list:
+    flag = SearchHash.execute(arr, i)
+    print("SearchHash : ", flag)
+
+
