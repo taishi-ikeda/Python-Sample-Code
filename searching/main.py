@@ -1,9 +1,9 @@
 import search_class.search_factory as sf
 import random
 
-sample_list = [65,190,-10]
+sample_list = [6,9,-1]
 
-arr = [random.randint(-200, 200) for i in range(100)]
+arr = [random.randint(-20, 20) for i in range(20)]
 print(arr)
 SearchSequential = sf.search_factory.create("sequential", False)
 for v in arr:
@@ -29,7 +29,7 @@ for i in sample_list:
     flag = SearchMBlock.find(i)
     print("SearchMBlock : ", flag)
 
-SearchBinary = sf.search_factory.create("binary", False)
+SearchBinary = sf.search_factory.create("binary", True)
 for v in arr:
     SearchBinary.append(v)
 

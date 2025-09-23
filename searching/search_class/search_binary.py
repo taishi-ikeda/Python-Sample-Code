@@ -31,10 +31,15 @@ class binary_search(search_base.search_base):
             mid = (right + left)//2
             if self._verbose:
                 print("left,mid,right = ",left,mid,right)
-            if x < sorted_arr[mid]:
-                right = mid
+
+            if x == sorted_arr[mid]:
+                return True
+            elif x < sorted_arr[mid]:
+                right = mid-1
             else:
                 left = mid+1
-        return sorted_arr[left-1] == x
+        if self._verbose:
+           print("left,mid,right = ",left,mid,right)
+        return sorted_arr[left] == x
 
 
