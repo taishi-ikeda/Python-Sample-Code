@@ -102,6 +102,8 @@ class binary_tree_search(search_base.search_base):
 
     def append(self,x:int) -> None:
         self._btree.add_node(x)
+        if self._verbose:
+           print(str(self._btree))
 
     def find(self, arr: list[int], x: int) -> bool:
         if self._verbose:
